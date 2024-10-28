@@ -222,9 +222,9 @@ async function searchByFirstLetter(letter) {
 
 function validateForm() {
     const contactForm = document.querySelector('.contact');
-    contactForm.style.display = 'flex'; // Show the contact form
+    contactForm.style.display = 'flex'; 
 
-    // Optional: Reset previous validation errors (if any)
+
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
     document.getElementById('phone').value = '';
@@ -233,23 +233,81 @@ function validateForm() {
     document.getElementById('retypePassword').value = '';
 }
 
-function submitForm() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const age = document.getElementById('age').value;
-    const password = document.getElementById('password').value;
-    const retypePassword = document.getElementById('retypePassword').value;
+function showContacts() {
+    rowData.innerHTML = `<div class="contact min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="container w-75 text-center">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <input id="nameInput" onkeyup="inputsValidation()" type="text" class="form-control" placeholder="Enter Your Name">
+                <div id="nameAlert" class="alert alert-danger w-100 mt-2 d-none">
+                    Special characters and numbers not allowed
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input id="emailInput" onkeyup="inputsValidation()" type="email" class="form-control " placeholder="Enter Your Email">
+                <div id="emailAlert" class="alert alert-danger w-100 mt-2 d-none">
+                    Email not valid *exemple@yyy.zzz
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input id="phoneInput" onkeyup="inputsValidation()" type="text" class="form-control " placeholder="Enter Your Phone">
+                <div id="phoneAlert" class="alert alert-danger w-100 mt-2 d-none">
+                    Enter valid Phone Number
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input id="ageInput" onkeyup="inputsValidation()" type="number" class="form-control " placeholder="Enter Your Age">
+                <div id="ageAlert" class="alert alert-danger w-100 mt-2 d-none">
+                    Enter valid age
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input  id="passwordInput" onkeyup="inputsValidation()" type="password" class="form-control " placeholder="Enter Your Password">
+                <div id="passwordAlert" class="alert alert-danger w-100 mt-2 d-none">
+                    Enter valid password *Minimum eight characters, at least one letter and one number:*
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input  id="repasswordInput" onkeyup="inputsValidation()" type="password" class="form-control " placeholder="Repassword">
+                <div id="repasswordAlert" class="alert alert-danger w-100 mt-2 d-none">
+                    Enter valid repassword 
+                </div>
+            </div>
+        </div>
+        <button id="submitBtn" disabled class="btn btn-outline-danger px-2 mt-3">Submit</button>
+    </div>
+</div> `
+    submitBtn = document.getElementById("submitBtn")
 
-    // validation
-    if (!name || !email || !phone || !age || !password || !retypePassword) {
-        alert('All fields are required.');
-        return;
-    }
 
-    if (password !== retypePassword) {
-        alert('Passwords do not match.');
-        return;
-    }
-    alert('Form submitted successfully!');
+    document.getElementById("nameInput").addEventListener("focus", () => {
+        nameInputTouched = true
+    })
+
+    document.getElementById("emailInput").addEventListener("focus", () => {
+        emailInputTouched = true
+    })
+
+    document.getElementById("phoneInput").addEventListener("focus", () => {
+        phoneInputTouched = true
+    })
+
+    document.getElementById("ageInput").addEventListener("focus", () => {
+        ageInputTouched = true
+    })
+
+    document.getElementById("passwordInput").addEventListener("focus", () => {
+        passwordInputTouched = true
+    })
+
+    document.getElementById("repasswordInput").addEventListener("focus", () => {
+        repasswordInputTouched = true
+    })
 }
+
+let nameInputTouched = false;
+let emailInputTouched = false;
+let phoneInputTouched = false;
+let ageInputTouched = false;
+let passwordInputTouched = false;
+let repasswordInputTouched = false;
